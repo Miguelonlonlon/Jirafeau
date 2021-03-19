@@ -81,6 +81,11 @@ if (isset($_FILES['file']) && is_writable(VAR_FILES)
         $key = $_POST['key'];
     }
 
+    $grupo = '';
+    if (isset($_POST['grupo'])) {
+        $grupo = $_POST['grupo'];
+    }
+
     $time = time();
     if (!isset($_POST['time']) || !$cfg['availabilities'][$_POST['time']]) {
         echo 'Error 4: The parameter time is invalid.';
@@ -141,7 +146,9 @@ if (isset($_FILES['file']) && is_writable(VAR_FILES)
         $ip,
         $cfg['enable_crypt'],
         $cfg['link_name_length'],
-        $cfg['file_hash']
+        $cfg['file_hash'],
+        $grupo,
+        $_POST['end']
     );
 
     if (empty($res) || $res['error']['has_error']) {
@@ -429,6 +436,11 @@ elseif (isset($_GET['init_async'])) {
         $key = $_POST['key'];
     }
 
+    $grupo = '';
+    if (isset($_POST['grupo'])) {
+        $grupo = $_POST['grupo'];
+    }
+
     // Check if one time download is enabled
     if (!$cfg['one_time_download'] && isset($_POST['one_time_download'])) {
         echo 'Error 26: One time download is disabled.';
@@ -504,7 +516,11 @@ elseif (isset($_GET['end_async'])) {
         || !isset($_POST['code'])) {
         echo 'Error 24';
     } else {
-        echo jirafeau_async_end($_POST['ref'], $_POST['code'], $cfg['enable_crypt'], $cfg['link_name_length'], $cfg['file_hash']);
+        $end = 'NO';
+        $grupo = '';
+        if (isset($_POST['grupo'])) $grupo = $_POST['grupo'];
+        if (isset($_POST['end'])) $end = $_POST['end'];
+        echo jirafeau_async_end($_POST['ref'], $_POST['code'], $cfg['enable_crypt'], $cfg['link_name_length'], $cfg['file_hash'], $grupo, $end);
     }
 } else {
     echo 'Error 25';

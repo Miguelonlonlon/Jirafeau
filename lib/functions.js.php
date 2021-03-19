@@ -30,6 +30,10 @@ var web_root = "<?php echo $cfg['web_root']; ?>";
 
 var lang_array = <?php echo json_lang_generator(null); ?>;
 var lang_array_fallback = <?php echo json_lang_generator("en"); ?>;
+var reti1 = '';
+var reti2 = '';
+var reti3 = '';
+var reti4 = '';
 
 function translate (expr) {
     if (lang_array.hasOwnProperty(expr)) {
@@ -125,91 +129,73 @@ function convertAllDatetimeFields() {
 
 function show_link (reference, delete_code, crypt_key, date)
 {
+    var req = new XMLHttpRequest ();
+    req.addEventListener ("error", XHRErrorHandler, false);
+    req.addEventListener ("abort", XHRErrorHandler, false);
+    req.onreadystatechange = function () {
+        if (req.readyState == 4) {
+            if (req.status == 200) {
+                var res = req.responseText;
+
+                // if response starts with "Error" then show a failure
+                if (/^Error/.test(res)) {
+                    pop_failure (res);
+                    return;
+                }
+                // Upload finished
+                document.getElementById('uploading').style.display = 'none';
+                document.getElementById('upload').style.display = 'none';
+                document.getElementById('upload_finished').style.display = '';
+                document.title = "100% - <?php echo empty($cfg['title']) ? 'Jirafeau' : $cfg['title']; ?>";
+                // Validity date
+                if (isEmpty(date)) {
+                    document.getElementById('date').style.display = 'none';
+                } else {
+                    document.getElementById('date').innerHTML = '<span class="datetime" title="'
+                        + date.format('DD-MM-YYYY hh:mm') + '">'
+                        + date.format('DD-MM-YYYY hh:mm')
+                        + '</span>';
+                    document.getElementById('date').style.display = '';
+                }
+            } else {
+                pop_failure ("<?php echo t("ERR_OCC"); ?>");
+            }
+        }
+    }
     // Upload finished
     document.getElementById('uploading').style.display = 'none';
     document.getElementById('upload').style.display = 'none';
     document.getElementById('upload_finished').style.display = '';
     document.title = "100% - <?php echo empty($cfg['title']) ? 'Jirafeau' : $cfg['title']; ?>";
-
-    // Download page
-    var download_link_href = 'f.php?h=' + reference;
-    if (crypt_key.length > 0)
-    {
-        download_link_href += '&k=' + crypt_key;
-    }
-    if (!!document.getElementById('upload_finished_download_page'))
-    {
-        document.getElementById('upload_link').href = download_link_href;
-        document.getElementById('upload_link_text').innerHTML = web_root + download_link_href;
-    }
-
-    // Email link
-    var filename = document.getElementById('file_select').files[0].name;
-    var b = encodeURIComponent("<?php echo t("DL"); ?> \"" + filename + "\":") + "%0D" + "%0A";
-    b += encodeURIComponent(web_root + download_link_href) + "%0D" + "%0A";
-    if (false == isEmpty(date))
-    {
-        b += "%0D" + "%0A" + encodeURIComponent("<?php echo t("VALID_UNTIL"); ?>: " + date.format('YYYY-MM-DD hh:mm (GMT O)')) + "%0D" + "%0A";
-        document.getElementById('upload_link_email').href = "mailto:?body=" + b + "&subject=" + encodeURIComponent(filename);
-    }
-
-    // Delete link
-    var delete_link_href = 'f.php?h=' + reference + '&d=' + delete_code;
-    document.getElementById('delete_link').href = delete_link_href;
-    document.getElementById('delete_link_text').innerHTML = web_root + delete_link_href;
-
     // Validity date
-    if (isEmpty(date))
-    {
+    if (isEmpty(date)) {
         document.getElementById('date').style.display = 'none';
-    }
-    else {
+    } else {
         document.getElementById('date').innerHTML = '<span class="datetime" title="'
-            + dateToUtcString(date) + ' (GMT)">'
-            + date.format('YYYY-MM-DD hh:mm (GMT O)')
+            + date.format('DD-MM-YYYY hh:mm') + '">'
+            + date.format('DD-MM-YYYY hh:mm')
             + '</span>';
         document.getElementById('date').style.display = '';
     }
 
-    // Preview link (if allowed)
-    if (!!document.getElementById('preview_link'))
-    {
-        document.getElementById('upload_finished_preview').style.display = 'none';
-        var preview_link_href = 'f.php?h=' + reference + '&p=1';
-        if (crypt_key.length > 0)
-        {
-            preview_link_href += '&k=' + crypt_key;
-        }
 
-        // Test if content can be previewed
-         type = document.getElementById('file_select').files[0].type;
-         if (type.indexOf("image") > -1 ||
-             type.indexOf("audio") > -1 ||
-             type.indexOf("text") > -1 ||
-             type.indexOf("video") > -1)
-         {
-            document.getElementById('preview_link').href = preview_link_href;
-            document.getElementById('preview_link_text').innerHTML = web_root + preview_link_href;
-            document.getElementById('upload_finished_preview').style.display = '';
-         }
-    }
+    // Send mails
+    req.open ("POST", 'lib/sendmail.php' , true);
 
-    // Direct download link
-    var direct_download_link_href = 'f.php?h=' + reference + '&d=1';
-    if (crypt_key.length > 0)
-    {
-        direct_download_link_href += '&k=' + crypt_key;
+    var form = new FormData();
+    form.append ("destinos", document.getElementById('destMail').value);
+    form.append ("nombre", document.getElementById('tuNombre').value);
+    form.append ("email", document.getElementById('tuMail').value);
+    form.append ("mensaje", document.getElementById('tuMensaje').value);
+    form.append ("enlace", reference);
+    form.append ("codigo_borra", delete_code);
+    if (crypt_key.length > 0) {
+        form.append ("encriptacion", crypt_key);
     }
-    document.getElementById('direct_link').href = direct_download_link_href;
-    document.getElementById('direct_link_text').innerHTML = web_root + direct_download_link_href;
+    form.append ("fecha", date.format('DD-MM-YYYY hh:mm'));
 
-    // Hide preview and direct download link if password is set
-    if (document.getElementById('input_key').value.length > 0)
-    {
-        if (!!document.getElementById('preview_link'))
-            document.getElementById('upload_finished_preview').style.display = 'none';
-        document.getElementById('upload_direct_download').style.display = 'none';
-    }
+    req.send (form);
+
 }
 
 function show_upload_progression (percentage, speed, time_left)
@@ -255,7 +241,12 @@ function upload_progress (e)
 
 function control_selected_file_size(max_size, error_str)
 {
-    f_size = document.getElementById('file_select').files[0].size;
+    var aFiles = document.getElementById("file_select").files;
+    f_size = 0;
+    for (let cont = 0; cont < aFiles.length; cont++) {
+        f_size += aFiles[cont].size;
+    }
+    <!-- f_size = document.getElementById('file_select').files[0].size; -->
     if (max_size > 0 && f_size > max_size * 1024 * 1024)
     {
         pop_failure(error_str);
@@ -269,6 +260,10 @@ function control_selected_file_size(max_size, error_str)
         document.getElementById('options').style.display = 'block';
         document.getElementById('send').style.display = 'block';
         document.getElementById('error_pop').style.display = 'none';
+        document.getElementById('file_select').style.display = 'none';
+        document.getElementById('losfiles').style.display = 'none';
+        document.getElementById('email_table').style.display = '';
+        document.getElementById('upload').firstElementChild.firstElementChild.textContent="Rellena el formulario"
         document.getElementById('send').focus();
     }
 }
@@ -338,8 +333,16 @@ function add_time_string_to_date(d, time)
     return false;
 }
 
-function classic_upload (file, time, password, one_time, upload_password)
+var classic_global_max_size = 0;
+var classic_global_size = 0;
+var classic_global_ff = 0;
+
+function classic_upload (max_size, file, time, password, one_time, upload_password, grupo, leni)
 {
+    classic_global_max_size = max_size;
+    classic_global_size += file.size;
+    classic_global_ff = eval(leni - 1);
+
     // Delay time estimation init as we can't have file size
     upload_time_estimation_init(0);
 
@@ -373,8 +376,11 @@ function classic_upload (file, time, password, one_time, upload_password)
                 }
                 expiryDate = localDatetime;
             }
-
-            show_link (res[0], res[1], res[2], expiryDate);
+            if (/^Continuando/.test(res)) {
+                upload(classic_global_max_size, classic_global_ff);
+            } else {
+                show_link (res[0], res[1], res[2], expiryDate);
+            }
         }
         else
         {
@@ -385,6 +391,7 @@ function classic_upload (file, time, password, one_time, upload_password)
 
     var form = new FormData();
     form.append ("file", file);
+    form.append ("grupo", grupo);
     if (time)
         form.append ("time", time);
     if (password)
@@ -393,7 +400,11 @@ function classic_upload (file, time, password, one_time, upload_password)
         form.append ("one_time_download", '1');
     if (upload_password.length > 0)
         form.append ("upload_password", upload_password);
-
+    if (classic_global_ff == 0) {
+        form.append ("end", classic_global_size);
+    } else {
+        form.append ("end", 'NO');
+    }
     req.send (form);
 }
 
@@ -407,15 +418,21 @@ var async_global_file;
 var async_global_ref = '';
 var async_global_max_size = 0;
 var async_global_time;
+var async_global_ff = 0;
+var async_global_f_size = 0;
+var async_global_grupo;
 var async_global_transfering = 0;
 var async_global_last_code;
 
-function async_upload_start (max_size, file, time, password, one_time, upload_password)
+function async_upload_start (max_size, file, time, password, one_time, upload_password, grupo, ff)
 {
     async_global_transfered = 0;
     async_global_file = file;
     async_global_max_size = max_size;
     async_global_time = time;
+    async_global_grupo = grupo;
+    async_global_ff = ff;
+    async_global_f_size += async_global_file.size;
 
     var req = new XMLHttpRequest ();
     req.addEventListener ("error", XHRErrorHandler, false);
@@ -443,6 +460,7 @@ function async_upload_start (max_size, file, time, password, one_time, upload_pa
     var form = new FormData();
     form.append ("filename", async_global_file.name);
     form.append ("type", async_global_file.type);
+    form.append ("grupo", async_global_grupo);
     if (time)
         form.append ("time", time);
     if (password)
@@ -565,21 +583,27 @@ function async_upload_end (code)
                 pop_failure (res);
                 return;
             }
-
             res = res.split ("\n");
             var expiryDate = '';
             if (async_global_time != 'none')
             {
-              // convert time (local time + selected expiry date)
-              var localDatetime = new Date();
-              if(!add_time_string_to_date(localDatetime, async_global_time)) {
-                pop_failure ('Error: Date can not be parsed');
-                return;
-              }
-              expiryDate = localDatetime;
+                // convert time (local time + selected expiry date)
+                var localDatetime = new Date();
+                if(!add_time_string_to_date(localDatetime, async_global_time)) {
+                    pop_failure ('Error: Date can not be parsed');
+                    return;
+                }
+                expiryDate = localDatetime;
             }
-
-            show_link (res[0], res[1], res[2], expiryDate);
+            if (res != "NO") {
+                reti1 = res[0];
+                reti2 = res[1];
+                reti3 = res[2];
+                reti4 = expiryDate;
+                show_link(reti1, reti2, reti3, reti4);
+            } else {
+                upload(async_global_max_size, async_global_ff);
+            }
         }
     }
     req.open ("POST", 'script.php?end_async' , true);
@@ -587,34 +611,57 @@ function async_upload_end (code)
     var form = new FormData();
     form.append ("ref", async_global_ref);
     form.append ("code", code);
+    form.append ("grupo", async_global_grupo);
+    if (async_global_ff == 0) {
+        form.append ("end", async_global_f_size);
+    } else {
+        form.append ("end", 'NO');
+    }
     req.send (form);
 }
 
-function upload (max_size)
+function upload (max_size, lenn)
 {
     var one_time_checkbox = document.getElementById('one_time_download');
     var one_time = one_time_checkbox !== null ? one_time_checkbox.checked : false;
+    var grupo = document.getElementById('grupo').value;
+    var f_size = 0;
+    // var f_files = document.getElementById('file_select').files.length;
+    // var f_f = document.getElementById('file_select').files.length;
+    // f_f = eval(f_f - 1);
+    // for (let i = 0; i < f_files; i++)
+    // {
+    // f_size += document.getElementById('file_select').files[i].size;
+    var leni = eval(lenn - 1);
     if (check_html5_file_api ())
     {
-        async_upload_start (
+        async_upload_start
+        (
             max_size,
-            document.getElementById('file_select').files[0],
+            document.getElementById('file_select').files[leni],
             document.getElementById('select_time').value,
             document.getElementById('input_key').value,
             one_time,
-            document.getElementById('upload_password').value
-            );
+            document.getElementById('upload_password').value,
+            grupo,
+            leni
+        );
     }
     else
     {
-        classic_upload (
-            document.getElementById('file_select').files[0],
+        classic_upload
+        (
+            max_size,
+            document.getElementById('file_select').files[leni],
             document.getElementById('select_time').value,
             document.getElementById('input_key').value,
             one_time,
-            document.getElementById('upload_password').value
-            );
+            document.getElementById('upload_password').value,
+            grupo,
+            leni
+        );
     }
+    // }
 }
 
 var upload_time_estimation_total_size = 42;

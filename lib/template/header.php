@@ -12,6 +12,7 @@ header('x-ua-compatible: ie=edge');
 </head>
 <body>
 <script type="text/javascript" src="<?php echo 'lib/functions.js.php'; ?>"></script>
+<script type="text/javascript" src="lib/js/functions.js"></script>
 <div id="content">
   <h1>
     <a href="./">

@@ -33,20 +33,21 @@
    ========================================================================== */
 
 /* Call Google Fonts */
-  @import url(https://fonts.googleapis.com/css?family=Open+Sans|Lobster);
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans|Arial);
 
 body {
   background: #050505;
   background-image: url("bg1.png"), url("bg2.png");
   background-repeat: repeat-x, repeat;
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   color: #ffffff;
   margin: 0;
-  line-height: 1.5;
+  /*line-height: 1.5;*/
+  heigth: 95vh;
 }
 
 h1 a {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   font-weight: 200;
   display: block;
   background: url(logo.png) no-repeat;
@@ -60,14 +61,14 @@ h1 a {
 }
 
 h2 {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   text-align: center;
   color: #ffffff;
 }
 
 fieldset {
   border: 0;
-  padding: 1.5em;
+  padding: 0.5em 1.5em;
   margin: 0 auto;
   border-radius: 8px;
   width: 20em;
@@ -85,6 +86,7 @@ legend {
   display: block;
   min-width: 8em;
   text-align: center;
+  border-radius: 8px;
 }
 
 table a {
@@ -97,7 +99,7 @@ table a:focus {
 }
 
 input[type="submit"] {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   background: #157EFB;
   border: 0;
   padding: 0.4em 2.2em;
@@ -110,8 +112,9 @@ input[type="submit"] {
 
 select,
 input[type="text"],
-input[type="password"] {
-  font-family: 'Lobster', cursive;
+input[type="password"],
+textarea {
+  font-family: 'Arial', cursive;
   border: 1;
   padding: 5px 5px;
   font-size: 1em;
@@ -121,7 +124,7 @@ select { width: 100%; }
 
 input[type="submit"]:hover,
 input[type="submit"]:focus {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   border: 0;
   position: relative;
   background: #085B69;
@@ -133,13 +136,14 @@ input[type="submit"]:focus {
   margin-top: 3em;
 }
 
-#upload fieldset {
+#upload #file_list {
   background: url(upload.png) no-repeat center;
   -webkit-transition: all 0.5s ease;
      -moz-transition: all 0.5s ease;
       -ms-transition: all 0.5s ease;
        -o-transition: all 0.5s ease;
           transition: all 0.5s ease;
+  min-height: 16em;
 }
 
 #upload fieldset:hover {
@@ -151,15 +155,22 @@ input[type="submit"]:focus {
 }
 
 #file_select {
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 16em;
   cursor: pointer;
   opacity: 0;
+  top: 0;
+  left: 0%;
 }
-#upload.file-selected #file_select {
-  opacity: 1;
-  height: 2em;
+#upload.file-selected #file_list {
+/*  background: url(upload.png) no-repeat center;
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+          transition: all 0.5s ease;*/
+  background-image: none;
 }
 #upload.file-selected fieldset {
   background-image: none;
@@ -174,7 +185,8 @@ input[type="submit"]:focus {
   text-align: center;
   font-size: 0.7em;
   color: #ffffff;
-  padding-left: 3em;
+  /*padding-left: 3em;*/
+  margin-top: 5px;
 }
 
 #copyright a {
@@ -183,9 +195,44 @@ input[type="submit"]:focus {
   text-decoration: none;
 }
 
+.footer-links {
+  display: inline;
+}
+
+.light {
+  margin-right: 20px;
+}
+
 #copyright a:hover,
 #copyright a:focus {
   text-decoration: underline;
+}
+
+#jyraphe {
+  background: url('jyraphe.png') right bottom no-repeat ;
+  background-size: cover;
+  position: fixed;
+  transition: opacity linear;
+  transition: 0.3s;
+  bottom: 0;
+  right: 0;
+  height: 100px;
+  width: 100px;
+  clear:both;
+}
+
+#jyraphe:hover {
+  background: url('jyraphehover.png') right bottom no-repeat ;
+  background-size: cover;
+  position: fixed;
+  transition: opacity linear;
+  transition: 0.3s;
+  bottom: 0;
+  right: 0;
+  height: 100px;
+  width: 100px;
+  clear:both;
+  cursor: pointer;
 }
 
 /* ==========================================================================
@@ -207,12 +254,8 @@ input[type="submit"]:focus {
   height: 100%;
 }
 
-#option_table td:first-child {
-}
-
 #options input[type="submit"] {
   position: relative;
-  left: 11.2em;
 }
 
 /* ==========================================================================
@@ -224,38 +267,38 @@ input[type="submit"]:focus {
 .message,
 .info,
 .error {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   text-align: center;
   color: #ffffff;
   padding-left: 3em;
 }
 
 #upload_finished > p:nth-child(1) {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   color: #157EFB;
   font-weight: bold;
 }
 
 #upload_finished div p:nth-child(1) {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   font-weight: bold;
 }
 
 #upload_finished a {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   text-decoration: none;
   color: #ffffff;
 }
 
 #uploading a {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   font-weight: bold;
   text-decoration: none;
   color: #ffffff;
 }
 
 #uploaded_percentage {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   font-size: 2em;
   font-weight: bold;
 }
@@ -264,13 +307,13 @@ input[type="submit"]:focus {
 #uploading a:hover,
 #upload_finished a:focus,
 #uploading a:focus {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   text-decoration: underline;
 }
 
 .message,
 .error {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   color: #f27a00;
   font-style: italic;
   font-weight: bold;
@@ -438,7 +481,7 @@ textarea[readonly="readonly"] + p + p a:focus {
 #admin .info { width: 19em; }
 
 #admin input[type="submit"] {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   min-width: 10.5em;
 }
 
@@ -447,7 +490,7 @@ textarea[readonly="readonly"] + p + p a:focus {
 }
 
 #admin + fieldset td:first-child input[type="submit"] {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   background: none;
   padding: 0;
   color: #000;
@@ -457,7 +500,7 @@ textarea[readonly="readonly"] + p + p a:focus {
 
 #admin + fieldset td:first-child input[type="submit"]:hover,
 #admin + fieldset td:first-child input[type="submit"]:focus {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   text-decoration: underline;
 }
 
@@ -466,7 +509,7 @@ textarea[readonly="readonly"] + p + p a:focus {
    ========================================================================== */
 
 #self_destruct {
-  font-family: 'Lobster', cursive;
+  font-family: 'Arial', cursive;
   font-weight: bold;
   color: red;
   background-image: url('pixel_bomb.png');

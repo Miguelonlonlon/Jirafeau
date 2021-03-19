@@ -47,6 +47,7 @@ define('JIRAFEAU_VERSION', '4.3.0');
 define('VAR_FILES', $cfg['var_root'] . 'files/');
 define('VAR_LINKS', $cfg['var_root'] . 'links/');
 define('VAR_ASYNC', $cfg['var_root'] . 'async/');
+define('VAR_GROUPS', $cfg['var_root'] . 'groups/');
 
 // helping variable to build absolute link to
 // root of the domain without handling the URL scheme
@@ -75,4 +76,4 @@ define('JIRAFEAU_QUARTER', 7776000); // JIRAFEAU_DAY * 90
 define('JIRAFEAU_YEAR', 31536000); // JIRAFEAU_DAY * 365
 
 // set UTC as default timezone for all date/time functions
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/Madrid');

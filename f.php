@@ -71,14 +71,19 @@ if (isset($_GET['p']) && !empty($_GET['p'])) {
     $do_preview = true;
 }
 
-$p = s2p($link['hash']);
-if (!file_exists(VAR_FILES . $p . $link['hash'])) {
-    jirafeau_delete_link($link_name);
-    require(JIRAFEAU_ROOT.'lib/template/header.php');
-    echo '<div class="error"><p>'.t('FILE_NOT_AVAIL').
-    '</p></div>';
-    require(JIRAFEAU_ROOT.'lib/template/footer.php');
-    exit;
+$esgrupo = false;
+if (jirafeau_is_group($link_name)) {
+    $esgrupo = true;
+} else {
+    $p = s2p($link['hash']);
+    if (!file_exists(VAR_FILES . $p . $link['hash'])) {
+        jirafeau_delete_link($link_name);
+        require(JIRAFEAU_ROOT.'lib/template/header.php');
+        echo '<div class="error"><p>'.t('FILE_NOT_AVAIL').
+        '</p></div>';
+        require(JIRAFEAU_ROOT.'lib/template/footer.php');
+        exit;
+    }
 }
 
 if (!empty($delete_code) && $delete_code == $link['link_code']) {
@@ -95,15 +100,19 @@ if (!empty($delete_code) && $delete_code == $link['link_code']) {
              <legend> <?php echo t('CONFIRM_DEL') ?> </legend>
              <table>
              <tr><td>
-             <?php echo t('GONNA_DEL') . ' "' . jirafeau_escape($link['file_name']) . '" (' . jirafeau_human_size($link['file_size']) . ').' ?>
+             <?php if ($esgrupo) {
+                echo t('GONNA_DEL') . ' "Descarga_' . $link_name . '.zip"';
+             } else {
+                echo t('GONNA_DEL') . ' "' . jirafeau_escape($link['file_name']) . '" (' . jirafeau_human_size($link['file_size']) . ').';
+             } ?>
              </td></tr>
              <tr><td>
                 <?php echo t('USING_SERVICE'). ' <a href="tos.php" target="_blank" rel="noopener noreferrer">' . t('TOS') . '</a>.' ?>
              </td></tr>
              <tr><td>
-                <input type="submit" id="submit_delete"  value="<?php echo t('DELETE'); ?>"
+                <input type="submit" id="submit_delete" value="<?php echo t('DELETE'); ?>"
                 onclick="document.getElementById('submit_delete_post').action='<?php echo 'f.php?h=' . $link_name . '&amp;d=' . $delete_code . "';"; ?>
-                document.getElementById('submit_delete').submit ();"/>
+                document.getElementById('submit_delete_post').submit();"/>
              </td></tr>
              </table>
          </fieldset></form></div><?php
@@ -158,7 +167,7 @@ if (!empty($link['key'])) {
         if (!empty($crypt_key)) {
             echo '&amp;k=' . urlencode($crypt_key);
         } ?>';
-        document.getElementById('submit_download').submit ();"/><?php
+        document.getElementById('submit_post').submit();"/><?php
         if ($cfg['preview'] && jirafeau_is_viewable($link['mime_type'])) {
             ?><input type="submit" id = "submit_preview"  value="<?php echo t('PREVIEW'); ?>"
             onclick="document.getElementById('submit_post').action='<?php
@@ -166,7 +175,7 @@ if (!empty($link['key'])) {
             if (!empty($crypt_key)) {
                 echo '&amp;k=' . urlencode($crypt_key);
             } ?>';
-            document.getElementById('submit_preview').submit ();"/><?php
+            document.getElementById('submit_post').submit();"/><?php
         }
         echo '</td></tr></table></fieldset></form></div>';
         require(JIRAFEAU_ROOT.'lib/template/footer.php');
@@ -209,7 +218,7 @@ if (!$password_challenged && !$do_download && !$do_preview) {
     if (!empty($crypt_key)) {
         echo '&amp;k=' . urlencode($crypt_key);
     } ?>';
-        document.getElementById('submit_post').submit ();"/><?php
+        document.getElementById('submit_post').submit();"/><?php
 
         if ($cfg['preview'] && jirafeau_is_viewable($link['mime_type'])) {
             ?><input type="submit" id = "submit_preview"  value="<?php echo t('PREVIEW'); ?>"
@@ -218,7 +227,7 @@ if (!$password_challenged && !$do_download && !$do_preview) {
             if (!empty($crypt_key)) {
                 echo '&amp;k=' . urlencode($crypt_key);
             } ?>';
-        document.getElementById('submit_post').submit ();"/><?php
+        document.getElementById('submit_post').submit();"/><?php
         }
     echo '</td></tr>';
     echo '</table></fieldset></form></div>';
@@ -228,12 +237,17 @@ if (!$password_challenged && !$do_download && !$do_preview) {
 
 header('HTTP/1.0 200 OK');
 header('Content-Length: ' . $link['file_size']);
-if (!jirafeau_is_viewable($link['mime_type']) || !$cfg['preview'] || $do_download) {
-    header('Content-Disposition: attachment; filename="' . $link['file_name'] . '"');
+if ($esgrupo) {
+    header('Content-Disposition: attachment; filename="Descarga_' . $link_name . '.zip"');
+    header('Content-Type: application/zip');
 } else {
-    header('Content-Disposition: filename="' . $link['file_name'] . '"');
+    if (!jirafeau_is_viewable($link['mime_type']) || !$cfg['preview'] || $do_download) {
+        header('Content-Disposition: attachment; filename="' . $link['file_name'] . '"');
+    } else {
+        header('Content-Disposition: filename="' . $link['file_name'] . '"');
+    }
+    header('Content-Type: ' . $link['mime_type']);
 }
-header('Content-Type: ' . $link['mime_type']);
 if ($cfg['file_hash'] == "md5") {
     header('Content-MD5: ' . hex_to_base64($link['hash']));
 }
@@ -272,11 +286,16 @@ elseif ($link['crypted']) {
 }
 /* Read file. */
 else {
-    $r = fopen(VAR_FILES . $p . $link['hash'], 'r');
-    while (!feof($r)) {
-        print fread($r, 1024);
+    if ($esgrupo) {
+        $fi = jirafeau_get_zip($link_name, "fread");
+    } else {
+        $fi = VAR_FILES . $p . $link['hash'];
+        $r = fopen($fi, 'r');
+        while (!feof($r)) {
+            print fread($r, 1024);
+        }
+        fclose($r);
     }
-    fclose($r);
 }
 
 if ($link['onetime'] == 'O') {

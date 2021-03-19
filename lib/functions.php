@@ -28,7 +28,7 @@ function s2p($s)
     $block_size = 8;
     $p = '';
     for ($i = 0; $i < strlen($s); $i++) {
-        $p .= $s{$i};
+        $p .= $s[$i];
         if (($i + 1) % $block_size == 0) {
             $p .= '/';
         }
@@ -68,16 +68,16 @@ function base_16_to_64($num)
     # Convert long hex string to bin.
     $size = strlen($num);
     for ($i = 0; $i < $size; $i++) {
-        $b .= $hex2bin{hexdec($num{$i})};
+        $b .= $hex2bin[hexdec($num[$i])];
     }
     # Convert long bin to base 64.
     $size *= 4;
     for ($i = $size - 6; $i >= 0; $i -= 6) {
-        $o = $m{bindec(substr($b, $i, 6))} . $o;
+        $o = $m[bindec(substr($b, $i, 6))] . $o;
     }
     # Some few bits remaining ?
     if ($i < 0 && $i > -6) {
-        $o = $m{bindec(substr($b, 0, $i + 6))} . $o;
+        $o = $m[bindec(substr($b, 0, $i + 6))] . $o;
     }
     return $o;
 }
@@ -260,31 +260,35 @@ function jirafeau_upload_errstr($code)
 
 function jirafeau_delete_link($link)
 {
-    $l = jirafeau_get_link($link);
-    if (!count($l)) {
-        return;
-    }
+    if (jirafeau_is_group($link)) {
+        jirafeau_delete_group($link);
+    } else {
+        $l = jirafeau_get_link($link);
+        if (!count($l)) {
+            return;
+        }
 
-    jirafeau_clean_rm_link($link);
+        jirafeau_clean_rm_link($link);
 
-    $hash = $l['hash'];
-    $p = s2p("$hash");
+        $hash = $l['hash'];
+        $p = s2p("$hash");
 
-    $counter = 1;
-    if (file_exists(VAR_FILES . $p . $hash. '_count')) {
-        $content = file(VAR_FILES . $p . $hash. '_count');
-        $counter = trim($content[0]);
-    }
-    $counter--;
+        $counter = 1;
+        if (file_exists(VAR_FILES . $p . $hash. '_count')) {
+            $content = file(VAR_FILES . $p . $hash. '_count');
+            $counter = trim($content[0]);
+        }
+        $counter--;
 
-    if ($counter >= 1) {
-        $handle = fopen(VAR_FILES . $p . $hash. '_count', 'w');
-        fwrite($handle, $counter);
-        fclose($handle);
-    }
+        if ($counter >= 1) {
+            $handle = fopen(VAR_FILES . $p . $hash. '_count', 'w');
+            fwrite($handle, $counter);
+            fclose($handle);
+        }
 
-    if ($counter == 0) {
-        jirafeau_clean_rm_file($hash);
+        if ($counter == 0) {
+            jirafeau_clean_rm_file($hash);
+        }
     }
 }
 
@@ -391,7 +395,7 @@ function jirafeau_md5_outside($file_path)
  *   'link' => the link name of the uploaded file
  *   'delete_link' => the link code to delete file
  */
-function jirafeau_upload($file, $one_time_download, $key, $time, $ip, $crypt, $link_name_length, $file_hash_method)
+function jirafeau_upload($file, $one_time_download, $key, $time, $ip, $crypt, $link_name_length, $file_hash_method, $grupo, $end)
 {
     if (empty($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
         return (array(
@@ -495,10 +499,22 @@ function jirafeau_upload($file, $one_time_download, $key, $time, $ip, $crypt, $l
                  'link' =>'',
                  'delete_link' => '');
     }
-    return array( 'error' => $noerr,
-                  'link' => $hash_link,
-                  'delete_link' => $delete_link_code,
-                  'crypt_key' => $crypt_key);
+    if (jirafeau_async_file2group($hash_link, $grupo) != 'OK') {
+        return 'Error';
+    }
+    if ($end == 'NO') {
+        return array( 'error' => "Continuando",
+        'link' => '',
+        'delete_link' => '');
+    } else {
+        $resu = jirafeau_async_grouplink($grupo, $code, $crypt, $link_name_length, $file_hash_method, $time, $one_time_download, $ip, $end);
+        $claves = file(VAR_GROUPS . $resu, FILE_IGNORE_NEW_LINES);
+        //return $resu . NL . $claves[9] . NL . $crypt_key;
+        return array( 'error' => $noerr,
+                    'link' => $resu,
+                    'delete_link' => $claves[9],
+                    'crypt_key' => $crypt_key);
+    }
 }
 
 /**
@@ -884,8 +900,68 @@ function jirafeau_async_init($filename, $type, $one_time, $key, $time, $ip)
             time() . NL . $code . NL
     );
     fclose($handle);
-
     return $ref . NL . $code ;
+}
+
+function jirafeau_async_file2group($link, $grupo)
+{
+    $p = VAR_GROUPS;
+    @mkdir($p, 0755, true);
+    if (!file_exists($p)) {
+        return 'Error creando directorio de grupo';
+    }
+    /* touch empty data file */
+    $w_path = $p . $grupo;
+    if (!file_exists($w_path)) {
+        touch($w_path);
+    }
+    /* Store informations. */
+    $wa = file_get_contents($w_path);
+    $ha = fopen($w_path, 'w');
+    fwrite($ha, $wa);
+    fwrite($ha, $link . NL);
+    fclose($ha);
+    return "OK";
+}
+
+
+function jirafeau_async_grouplink($grupo, $code, $crypt, $link_name_length, $file_hash_method, $time, $onetime, $ip, $key, $end)
+{
+    $p = VAR_GROUPS . $grupo;
+    if (!file_exists($p)) {
+        return 'Error';
+    }
+    $hash = jirafeau_hash_file($file_hash_method, $p);
+    $delete_link_code = jirafeau_gen_random(5);
+
+    /* Create link. */
+    $crypted = false;
+    $link_tmp_name =  VAR_LINKS . $hash . rand(0, 10000) . '.tmp';
+    $handle = fopen($link_tmp_name, 'w');
+    fwrite(
+        $handle,
+        'Descarga_###NAME###.zip' . NL . "application/zip" . NL . '#' . $end . NL .
+            $key . NL . $time . NL . $hash . NL . $onetime . NL .
+            time() . NL . $ip . NL . $delete_link_code . NL . ($crypted ? 'C' : 'O')
+    );
+    fclose($handle);
+    $hash_link = substr(base_16_to_64(md5_file($link_tmp_name)), 0, $link_name_length);
+    $l = s2p($hash_link);
+    $handle = fopen($link_tmp_name, 'w');
+    fwrite(
+        $handle,
+        'Descarga_' . $hash_link .'.zip' . NL . "application/zip" . NL . '#' . $end . NL .
+            $key . NL . $time . NL . $hash . NL . $onetime . NL .
+            time() . NL . $ip . NL . $delete_link_code . NL . ($crypted ? 'C' : 'O')
+    );
+    fclose($handle);
+    if (!@mkdir(VAR_LINKS . $hash_link, 0755, true) || !rename($link_tmp_name, VAR_LINKS . $l . $hash_link) || !rename($p, VAR_GROUPS . $hash_link)) {
+        return 'Error renombrando grupo' . $link_tmp_name . '6969';
+    }
+    $crypt_key = "";
+    /* Clean async upload. */
+   /* return $hash_link . NL . $delete_link_code . NL . urlencode($crypt_key);*/
+   return $hash_link;
 }
 
 /**
@@ -958,19 +1034,19 @@ function jirafeau_async_push($ref, $data, $code, $max_file_size)
   * @param $link_name_length link name length
   * @return a string containing the download reference followed by a delete code or the string 'Error'
   */
-function jirafeau_async_end($ref, $code, $crypt, $link_name_length, $file_hash_method)
+function jirafeau_async_end($ref, $code, $crypt, $link_name_length, $file_hash_method, $grupo, $end)
 {
     /* Get async infos. */
     $a = jirafeau_get_async_ref($ref);
     if (count($a) == 0
         || $a['next_code'] != "$code") {
-        return "Error";
+        return "Error 1";
     }
 
     /* Generate link infos. */
     $p = VAR_ASYNC . s2p($ref) . $ref . "_data";
     if (!file_exists($p)) {
-        return 'Error';
+        return 'Error 2';
     }
 
     $crypted = false;
@@ -1017,15 +1093,23 @@ function jirafeau_async_end($ref, $code, $crypt, $link_name_length, $file_hash_m
     );
     fclose($handle);
     $hash_link = substr(base_16_to_64(md5_file($link_tmp_name)), 0, $link_name_length);
-    $l = s2p("$hash_link");
-    if (!@mkdir(VAR_LINKS . $l, 0755, true) ||
-        !rename($link_tmp_name, VAR_LINKS . $l . $hash_link)) {
+    $l = s2p($hash_link);
+    if (!@mkdir(VAR_LINKS . $l, 0755, true) ||  !rename($link_tmp_name, VAR_LINKS . $l . $hash_link)) {
         return 'Error';
     }
-
-    /* Clean async upload. */
-    jirafeau_async_delete($ref);
-    return $hash_link . NL . $delete_link_code . NL . urlencode($crypt_key);
+    if (jirafeau_async_file2group($hash_link, $grupo) != 'OK') {
+        return 'Error';
+    }
+    if ($end == 'NO') {
+        jirafeau_async_delete($ref);
+        return "NO";
+    } else {
+        $resu = jirafeau_async_grouplink($grupo, $code, $crypt, $link_name_length, $file_hash_method, $a['time'], $a['onetime'], $a['ip'], $a['key'], $end);
+        $claves = jirafeau_get_link($resu);
+        jirafeau_async_delete($ref);
+        return $resu . NL . $claves['link_code'] . NL . $crypt_key;
+    }
+    //return $hash_link . NL . $delete_link_code . NL . urlencode($crypt_key);
 }
 
 function jirafeau_crypt_create_iv($base, $size)
@@ -1427,4 +1511,67 @@ function jirafeau_check_var_dir($path)
 function jirafeau_add_ending_slash($path)
 {
     return $path . ((substr($path, -1) == '/') ? '' : '/');
+}
+
+function jirafeau_get_zip($link_name, $respmode) {
+    $l = jirafeau_get_link($link_name);
+    $dest ="";
+    if (count($l)) {
+        $file = VAR_GROUPS . $link_name;
+        if (file_exists($file)) {
+            if (!is_dir(VAR_GROUPS . 'zips/')) @mkdir(VAR_GROUPS . 'zips');
+            $dest = VAR_GROUPS . 'zips/Descarga_' . $link_name . '.zip';
+            $diri = 'Archivos_' . $link_name;
+            $st = file($file, FILE_IGNORE_NEW_LINES);
+            $z = new ZipArchive();
+            $z->open($dest, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+            $z->setArchiveComment("Fichero descargado del sistema de compartición de archivos de RG Laboratorio Dental\r\nVisítanos en https://rglaboratoriodental.com\r\nTambien puedes encontrarnos en Facebook, Instagram y LinkedIn.\r\n\r\nGracias por tu confianza.");
+            $z->addEmptyDir($diri);
+            if (!empty($l['key'])) $z->setPassword($l['key']);
+            //$z->close();
+            foreach ($st as $lin) {
+                $lia = jirafeau_get_link($lin);
+                $pa = s2p($lia['hash']);
+                $ori = VAR_FILES . $pa . $lia['hash'];
+                //$zip = new ZipArchive();
+                //$zip->open($dest);
+                $z->addFile($ori, $diri . '/' . $lia['file_name']);
+                if (!empty($l['key'])) $z->setEncryptionName($diri . '/' . $lia['file_name'], ZipArchive::EM_AES_256);
+                //$zip->close();
+            }
+            $z->close();
+        }
+        if ($respmode == "link") {
+            return $dest;
+        } elseif ($respmode == "fread") {
+            $r = fopen($dest, 'r');
+            while (!feof($r)) {
+                print fread($r, 1024);
+            }
+            fclose($r);
+        }
+        
+    }
+    return;
+}
+
+function jirafeau_is_group($link_name) {
+    $file = VAR_GROUPS . $link_name;
+    if (file_exists($file)) {
+        return true;
+    }
+    return false;
+}
+
+function jirafeau_delete_group($link_name) {
+    $file = VAR_GROUPS . $link_name;
+    if (file_exists($file)) {
+        if ($stream = fopen($file, "r")) {
+            while(($line=fgets($stream))!==false) {
+                jirafeau_delete_link($line);
+            }
+            fclose($stream);
+        }
+    }
+    return true;
 }
