@@ -41,11 +41,13 @@ $delete_code  = $_POST['codigo_borra'];
 $date  = str_replace(" ", " a las ", $_POST['fecha']);
 
 
-$link_down =  'https://'.$cfg['web_root'].'f.php?h='.$link;
+$link_down =  $cfg['web_root'].'f.php?h='.$link;
 if (isset($_POST['encriptacion'])) {
     $link_down =  $link_down . '&k=' . $_POST['encriptacion'];
 }
-$link_delete =  'https://'.$cfg['web_root'].'f.php?h='.$link.'&d='.$delete_code;
+$link_down = file_get_contents('https://rgld.eu/yourls-api.php?signature=4bb6436370&action=shorturl&format=simple&url=' . urlencode($link_down));
+$link_delete =  $cfg['web_root'].'f.php?h='.$link.'&d='.$delete_code;
+$link_delete = file_get_contents('https://rgld.eu/yourls-api.php?signature=4bb6436370&action=shorturl&format=simple&url=' . urlencode($link_delete));
 
 
 $file_list = '';
@@ -56,8 +58,8 @@ foreach ($enlaces as $enla) {
 }
 $file_list = str_replace("#%#%#%", "<br/>", $file_list);
 	
-$dest_email_html_orig = '<div style="height: 185px;"><h1 style="color: #5e9ca0;"><img style="border-style: none; float: left;" src="https://rglaboratoriodental.es/files/img/logo.png" alt="Logo de RG File Sharing" width="194" height="185" /></h1><h1 style="color: #5e9ca0;">Alguien te manda unos archivos.</h1><p>&nbsp;</p><h2>Sigue leyendo para saber qu&eacute; hacer</h2></div><div><p>&nbsp;</p><p>###SENDERNAME### (###SENDER###) ha compartido contigo unos archivos desde nuestro sistema de compartici&oacute;n de ficheros con un mensaje para ti:</p><blockquote>###MENSAJE###</blockquote><p>Para ver o descargar estos archivos pulsa <a title="Ver los archivos" href="###ENLACE###" target="_blank"><span style="background-color: #5e9ca0; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">aqu&iacute;</span></a>.</p><p>Si el enlace anterior no funciona copia y pega el enlace siguiente en tu navegador:</p><p style="padding-left: 40px;"><a title="Ver los archivos" href="###ENLACE###" target="_blank">###ENLACE###</a></p><p>Este enlace estar&aacute; disponible hasta el ###FECHA###</p><p>Si no conoces al remitente simplemente ignora este email y nada ocurrir&aacute;.</p><p>Muchas gracias por confiar en nosotros.</p><hr /><table style="width: 100%; border-collapse: collapse; border-style: none;" border="0"><tbody><tr><td style="width: 50%;"><blockquote>RG Laboratorio Dental<br />C/Domingo Ram 45 Local<br /><a title="info@rglaboratoriodental.com" href="mailto:info@rglaboratoriodental.com" target="_blank">info@rglaboratoriodental.com</a><br /><a title="RG Laboratorio Dental" href="https://rglaboratoriodental.com" target="_blank">https://rglaboratoriodental.com</a></blockquote></td><td style="width: 50%; text-align: right;">RG File Sharing<br /><br /><a title="https://rglaboratoriodental.es/files" href="###JIRAFEAU_URL###" target="_blank">###JIRAFEAU_URL###</a><br /><br />&nbsp;</td></tr></tbody></table></div>';
-$sender_email_html_orig = '<div style="height: 185px;"><h1 style="color: #5e9ca0;"><img style="border-style: none; float: left;" src="https://rglaboratoriodental.es/files/img/logo.png" alt="Logo de RG File Sharing" width="194" height="185" /></h1><h1 style="color: #5e9ca0;">Tus archivos se han enviado.</h1><p>&nbsp;</p><h2>Sigue leyendo para m&aacute;s informaci&oacute;n.</h2></div><div><p>&nbsp;</p><p>###SENDERNAME###, has compartido unos archivos, aqu&iacute; tienes los detalles de tu env&iacute;o y alguna herramienta adicional:</p><blockquote>Destinatarios:<br />###DESTINATARIOS###</blockquote><blockquote>Tu mensaje:<br />###MENSAJE###</blockquote><blockquote>Archivos compartidos:<br />###ARCHIVOS###</blockquote><p>&nbsp;</p><p>Para ver o descargar estos archivos pulsa <a title="Ver los archivos" href="###ENLACE###" target="_blank" rel="noopener"><span style="background-color: #5e9ca0; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">aqu&iacute;</span></a>.</p><p>Si el enlace anterior no funciona copia y pega el enlace siguiente en tu navegador:</p><p style="padding-left: 40px;"><a title="Ver los archivos" href="###ENLACE###" target="_blank">###ENLACE###</a></p><p>Para eliminar los archivos pulsa <a title="Eliminar los archivos" href="###ENLACEBORRAR###" target="_blank" rel="noopener"><span style="background-color: #5e9ca0; color: #fff; display: inline-block; padding: 3px 10px; font-weight: bold; border-radius: 5px;">aqu&iacute;</span></a>.</p><p>Si el enlace anterior no funciona copia y pega el enlace siguiente en tu navegador:</p><p style="padding-left: 40px;"><a title="Eliminar los archivos" href="###ENLACEBORRAR###" target="_blank" rel="noopener">###ENLACEBORRAR###</a></p><p>&nbsp;</p><p>Este enlace estar&aacute; disponible hasta el ###FECHA###</p><p>Si no enviaste t&uacute; estos archivos haznoslo saber respondiendo a este correo.</p><p>Muchas gracias por confiar en nosotros.</p><hr /><table style="width: 100%; border-collapse: collapse; border-style: none;" border="0"><tbody><tr><td style="width: 50%;"><blockquote>RG Laboratorio Dental<br />C/Domingo Ram 45 Local<br /><a title="info@rglaboratoriodental.com" href="mailto:info@rglaboratoriodental.com" target="_blank">info@rglaboratoriodental.com</a><br /><a title="RG Laboratorio Dental" href="https://rglaboratoriodental.com" target="_blank">https://rglaboratoriodental.com</a></blockquote></td><td style="width: 50%; text-align: right;">RG File Sharing<br /><br /><a title="https://rglaboratoriodental.es/files" href="###JIRAFEAU_URL###" target="_blank">###JIRAFEAU_URL###</a><br /><br />&nbsp;</td></tr></tbody></table><p>&nbsp;</p></div>';
+$dest_email_html_orig = file_get_contents(JIRAFEAU_ROOT . 'lib/template/email.html');
+$sender_email_html_orig = file_get_contents(JIRAFEAU_ROOT . 'lib/template/emailsender.html');
 	
     $dest_email_html_orig = str_replace("###SENDER###", $your_Email, $dest_email_html_orig);
     $dest_email_html_orig = str_replace("###SENDERNAME###", $you, $dest_email_html_orig);
@@ -67,7 +69,7 @@ $sender_email_html_orig = '<div style="height: 185px;"><h1 style="color: #5e9ca0
     $dest_email_html_orig = str_replace("###DESTINATARIOS###", $toString_email, $dest_email_html_orig);
     $dest_email_html_orig = str_replace("###ARCHIVOS###", $file_list, $dest_email_html_orig);
     $dest_email_html_orig = str_replace("###FECHA###", $date, $dest_email_html_orig);
-    $dest_email_html_orig = str_replace("###JIRAFEAU_URL###", 'https://'.$cfg['web_root'], $dest_email_html_orig);
+    $dest_email_html_orig = str_replace("###JIRAFEAU_URL###", $cfg['web_root'], $dest_email_html_orig);
 
 
     $sender_email_html_orig = str_replace("###SENDER###", $your_Email, $sender_email_html_orig);
@@ -78,7 +80,7 @@ $sender_email_html_orig = '<div style="height: 185px;"><h1 style="color: #5e9ca0
     $sender_email_html_orig = str_replace("###DESTINATARIOS###", $toString_email, $sender_email_html_orig);
     $sender_email_html_orig = str_replace("###ARCHIVOS###", $file_list, $sender_email_html_orig);
     $sender_email_html_orig = str_replace("###FECHA###", $date, $sender_email_html_orig);
-    $sender_email_html_orig = str_replace("###JIRAFEAU_URL###", 'https://'.$cfg['web_root'], $sender_email_html_orig);
+    $sender_email_html_orig = str_replace("###JIRAFEAU_URL###", $cfg['web_root'], $sender_email_html_orig);
 
 
 $dest_email_html = wordwrap($dest_email_html_orig, 70);

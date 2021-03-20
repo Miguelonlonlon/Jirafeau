@@ -1,61 +1,79 @@
-TERMS OF SERVICE
-
-1. ACCEPTANCE OF TERMS
-###ORGANISATION### provides the information on this Web site as provided in these Terms of Service ("TOS"). ###ORGANISATION### may update the TOS at any time and without prior notice by posting a new version at ###WEBROOT###. The information on this site and your use of it is subject to the most recent version of the TOS posted.
-
-2. DESCRIPTION OF SERVICE
-###ORGANISATION### provides you an upload service and a variety of other services. ("###ORGANISATION### Service"). Unless explicitly stated otherwise, any new features that augment or enhance the current ###ORGANISATION### Service shall be subject to the TOS.
-
-3. CONDUCT
-You understand that all information, data, text, software, graphics or other materials ("Content"), whether publicly posted or privately transmitted, are the sole responsibility of the person from whom such Content originated. This means that you, and not ###ORGANISATION###, are entirely responsible for all Content that you upload, post, email, transmit or otherwise make available via the ###ORGANISATION### Service. ###ORGANISATION### does not control the Content posted via the ###ORGANISATION### Service and, as such, does not guarantee the accuracy, integrity or quality of such Content. Under no circumstances will ###ORGANISATION### be liable in any way for any Content, including, but not limited to, any errors or omissions in any Content, or any loss or damage of any kind incurred as a result of the use of any Content posted, emailed, transmitted or otherwise made available via the ###ORGANISATION### Service. You agree to not use the ###ORGANISATION### Service to:
-    1) upload, post, email, transmit or otherwise make available any Content that is unlawful, harmful, threatening, abusive, harassing, tortuous, defamatory, vulgar, obscene, libelous, invasive of another's privacy, hateful, or racially, ethnically or otherwise objectionable or harm minors;
-    2) impersonate any person or entity or falsely state or otherwise misrepresent your affiliation with a person or entity;
-    3) forge headers or otherwise manipulate identifiers in order to disguise the origin of any Content transmitted through the ###ORGANISATION### Service;
-    4) upload, post, email, transmit or otherwise make available any Content that you do not have a right to make available under any law or under contractual or other relationships;
-    5) upload, post, email, transmit or otherwise make available any Content that infringes any patent, trademark, trade secret, copyright or other proprietary rights of any party;
-    6) upload, post, email, transmit or otherwise make available any unsolicited or unauthorized advertising, promotional materials, "junk mail," "spam," or any other form of solicitation;
-    7) upload, post, email, transmit or otherwise make available any material that contains software viruses or any other computer code, files or programs designed to interrupt, destroy or limit the functionality of any computer software or hardware or telecommunications equipment;
-    8) disrupt the normal flow of dialogue, or otherwise act in a manner that negatively affects other users' ability to engage in discussions or exchanges;
-    9) interfere with or disrupt the ###ORGANISATION### Service or servers or networks connected to the ###ORGANISATION### Service, or disobey any requirements, procedures, policies or regulations of networks connected to the ###ORGANISATION### Service;
-    10) intentionally or unintentionally violate any applicable local, state, national or international law,
-    11) "stalk" or otherwise harass another; and/or
-    12) collect or store personal data about other users in connection with the prohibited conduct and activities set forth in paragraphs above. You acknowledge that ###ORGANISATION### may or may not pre-screen Content, but that ###ORGANISATION### and its designees shall have the right (but not the obligation) in their sole discretion to pre-screen, refuse, move, or remove any Content that is available via the ###ORGANISATION### Service and which violates the TOS. You agree that you must evaluate, and bear all risks associated with, the use of any Content, including any reliance on the accuracy, completeness, or usefulness of such Content. You acknowledge, consent and agree that ###ORGANISATION### may access, preserve and disclose your account information and Content if required to do so by law or in a good faith belief that such access preservation or disclosure is reasonably necessary to:
-    (a) comply with legal process;
-    (b) enforce the TOS;
-    (c) respond to claims that any Content violates the rights of third parties;
-    (d) respond to your requests for customer service; or (e) protect the rights, property or personal safety of ###ORGANISATION### its users and the public.
-
-4. CONTENT MADE AVAILABLE FOR INCLUSION ON THE ###ORGANISATION### SERVICE
-###ORGANISATION### does not claim ownership of Content you submit or make available for inclusion via the ###ORGANISATION### Service. However, with respect to Content you submit or make available for inclusion on the publicly available ###ORGANISATION### Service, you irrevocably grant ###ORGANISATION### the perpetual, worldwide, royalty-free and non-exclusive license, with the right to sublicense through multiple tiers of sublicensees, to use, distribute, reproduce, modify, adapt, publicly perform and publicly display such Content, in whole or in part, on the ###ORGANISATION### Service or other publications by ###ORGANISATION### in any media whether now existing or which come into the existence into the future and to provide that information under the license set forth on the initial page of the $url Web site. And for Content you submit for private discussions, you grant ###ORGANISATION### the worldwide, royalty-free and non-exclusive license to use, distribute, reproduce, modify, adapt, publicly perform and publicly display such Content on the associated private discussion group.
-
-5. INDEMNITY
-You agree to indemnify and hold ###ORGANISATION### and its subsidiaries, affiliates, officers, agents, employees, partners and licensors harmless from any claim or demand, including but not limited to reasonable attorneys' fees, made by any third party due to or arising out of Content you submit, post, transmit or otherwise make available through the Service, your use of the ###ORGANISATION### Service, your connection to the Service, your violation of the TOS, or your violation of any rights of another.
-
-6. MODIFICATIONS TO ###ORGANISATION### SERVICE You acknowledge that ###ORGANISATION### may establish general practices and limits concerning use of the ###ORGANISATION### Service, including without limitation the maximum number of days that email messages, message board postings or other uploaded Content will be retained by the ###ORGANISATION### Service.. You further acknowledge that ###ORGANISATION### reserves the right to modify these general practices and limits from time to time. ###ORGANISATION### reserves the right at any time and from time to time to modify or discontinue, temporarily or permanently, the ###ORGANISATION### Service (or any part thereof) with or without notice. You agree that ###ORGANISATION### shall not be liable to you or to any third party for any modification, suspension or discontinuance of the ###ORGANISATION### Service.
-
-7. TERMINATION
-You agree that ###ORGANISATION### may terminate your access to the ###ORGANISATION### Service for violations of the TOS and/or requests by authorized law enforcement or other government agencies.
-
-8. LINKS
-The ###ORGANISATION### Service may provide, or third parties may provide, links to other World Wide Web sites or resources. Because ###ORGANISATION### has no control over such sites and resources, you acknowledge and agree that ###ORGANISATION### is not responsible for the availability of such external sites or resources, and does not endorse and is not responsible or liable for any Content, advertising, products or other materials on or available from such sites or resources. You further acknowledge and agree that ###ORGANISATION### shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such Content, goods or services available on or through any such site or resource.
-
-9. DISCLAIMER OF WARRANTIES
-You expressly understand and agree that: Your use of the ###ORGANISATION### service is at your sole risk. ###ORGANISATION### service is provided on an "as is" and "as available" basis. ###ORGANISATION### and its subsidiaries, affiliates, officers, employees and licensors expressly disclaim all warranties of any kind, whether express or implied, including, but not limited to the implied warranties of merchantability, fitness for a particular purpose and non-infringement. ###ORGANISATION### and its subsidiaries, affiliates, officers, employees and licensors make no warranty that
-(i) The ###ORGANISATION### service will meet your requirements;
-(ii) The ###ORGANISATION### service will be uninterrupted, timely, secure or error-free and
-(iii) The results that may be obtained from the use of the ###ORGANISATION### service will be accurate or reliable. No advice or information, whether oral or written, obtained by you from ###ORGANISATION### or through or from the service shall create any warranty not expressly stated in the TOS.
-
-10. LIMITATION OF LIABILITY
-You expressly understand and agree that ###ORGANISATION### and its subsidiaries, affiliates, officers, employees, agents, partners and licensors shall not be liable to you for any direct, indirect, incidental, special, consequential or exemplary damages, including, but not limited to, damages for loss of profits, goodwill, use, data or other intangible losses (even if ###ORGANISATION### has been advised of the possibility of such damages), resulting from the use or the inability to use the ###ORGANISATION### service.
-
-11. NOTICE AND PROCEDURE FOR MAKING CLAIMS OF COPYRIGHT INFRINGEMENT
-###ORGANISATION### respects the copyright of others, and we ask our users to do the same. ###ORGANISATION### may, in appropriate circumstances and at its discretion, disable and/or terminate the access of users who may be repeat infringers. If you believe that your work has been copied in a way that constitutes copyright infringement, please provide ###ORGANISATION###'s Copyright Agent the following information: an electronic or physical signature of the person authorized to act on behalf of the owner of the copyright; a description of the copyrighted work that you claim has been infringed; a description of where the material that you claim is infringing is located on the site; your address, telephone number, and email address; a statement by you that you have a good faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law; a statement by you, made under penalty of perjury, that the above information in your Notice is accurate and that you are the copyright owner or authorized to act on the copyright owner's behalf.
-
-###ORGANISATION###'s Agent for Notice of claims of copyright infringement can be reached as follows:
-
-###CONTACTPERSON###
-
-
-
-This license text is under «Creative Commons - Attribution 3.0 Unported» (https://creativecommons.org/licenses/by/3.0).
-It is based on the «Open Source Initiative Terms of Service» (https://opensource.org/ToS).
+<fieldset style='color:#fafafa;font-size:14px;min-width:40em !important;padding-right:3em !important;'>
+    <legend>T&Eacute;RMINOS DE SERVICIO</legend>
+    <ol>
+        <li style="text-align: justify;"><strong>ACEPTACI&Oacute;N DE LOS T&Eacute;RMINOS</strong>
+        <p>###ORGANISATION### proporciona la informaci&oacute;n en este sitio web seg&uacute;n lo dispuesto en estos T&eacute;rminos de servicio ("TdS").<br/>
+        ###ORGANISATION### puede actualizar los TdS en cualquier momento y sin previo aviso mediante la publicaci&oacute;n de una nueva versi&oacute;n en ###WEBROOT###.<br/>
+        La informaci&oacute;n de este sitio y su uso de la misma est&aacute;n sujetos a la versi&oacute;n m&aacute;s reciente de los TdS publicados.</p></li>
+        <li style="text-align: justify;"><strong>DESCRIPCI&Oacute;N DEL SERVICIO</strong>
+        <p>###ORGANISATION### te proporciona un servicio de compartici&oacute;n de ficheros y otros servicios de compartici&oacute;n. A menos que se indique expl&iacute;citamente lo contrario, cualquier caracter&iacute;stica nueva que aumente o mejore el servicio actual estar&aacute; sujeta a los TdS.</p></li>
+        <li style="text-align: justify;"><strong>CONDUCTA</strong>
+        <p>Usted comprende que toda la informaci&oacute;n, datos, texto, software, gr&aacute;ficos u otros materiales ("Contenido"), ya sean publicados p&uacute;blicamente o transmitidos de forma privada, son responsabilidad exclusiva de la persona que public&oacute; dicho Contenido. Esto significa que usted, y no ###ORGANISATION###, es completamente responsable de todo el Contenido que cargue, publique, env&iacute;e por correo electr&oacute;nico, transmita o ponga a disposici&oacute;n de otro modo a trav&eacute;s de este Servicio.</p>
+        <p>###ORGANISATION### no controla el Contenido publicado a trav&eacute;s de su Servicio y como tal, no garantiza la precisi&oacute;n, integridad o calidad de dicho Contenido.</p>
+        <p>Bajo ninguna circunstancia ###ORGANISATION### ser&aacute; responsable de ninguna manera por ning&uacute;n Contenido, incluidos, entre otros, cualquier error u omisi&oacute;n en cualquier Contenido, o cualquier p&eacute;rdida o da&ntilde;o de cualquier tipo incurrido como resultado del uso de cualquier Contenido publicado, enviado por correo electr&oacute;nico, transmitido o puesto a disposici&oacute;n a trav&eacute;s del Servicio.</p>
+        <p>Al hacer uso del Servicio usted acepta no utilizarlo para:</p>
+        <ol style="list-style-type: upper-alpha;">
+            <li>cargar, publicar, enviar por correo electr&oacute;nico, transmitir o poner a disposici&oacute;n cualquier Contenido que sea ilegal, da&ntilde;ino, amenazante, abusivo, acosador, tortuoso, difamatorio, vulgar, obsceno, calumnioso, invasivo de la privacidad de otra persona, odioso o racial, &eacute;tnico o de otro tipo, menores objetables o perjudiciales;</li>
+            <li>hacerse pasar por otra persona o entidad o declarar falsamente o tergiversar su afiliaci&oacute;n con una persona o entidad;</li>
+            <li>falsificar encabezados o manipular identificadores para disfrazar el origen de cualquier Contenido transmitido a trav&eacute;s del Servicio;</li>
+            <li>cargar, publicar, enviar por correo electr&oacute;nico, transmitir o poner a disposici&oacute;n de cualquier otro modo cualquier Contenido que no tenga derecho a poner a disposici&oacute;n en virtud de ninguna ley o de relaciones contractuales o de otro tipo;</li>
+            <li>cargar, publicar, enviar por correo electr&oacute;nico, transmitir o poner a disposici&oacute;n cualquier Contenido que infrinja cualquier patente, marca comercial, secreto comercial, derechos de autor u otros derechos de propiedad de cualquier parte;</li>
+            <li>cargar, publicar, enviar por correo electr&oacute;nico, transmitir o poner a disposici&oacute;n cualquier publicidad, material promocional, "correo basura", "spam" o cualquier otra forma de solicitud no solicitada o no autorizada;</li>
+            <li>cargar, publicar, enviar por correo electr&oacute;nico, transmitir o poner a disposici&oacute;n cualquier material que contenga virus de software o cualquier otro c&oacute;digo de computadora, archivos o programas dise&ntilde;ados para interrumpir, destruir o limitar la funcionalidad de cualquier software o hardware de computadora o equipo de telecomunicaciones;</li>
+            <li>interrumpir el flujo normal del di&aacute;logo, o actuar de otra manera que afecte negativamente la capacidad de otros usuarios para participar en discusiones o intercambios;</li>
+            <li>interferir o interrumpir el Servicio o los servidores o redes conectados al Servicio, o desobedecer cualquier requisito, procedimiento, pol&iacute;tica o reglamentaci&oacute;n de las redes conectadas al Servicio;</li>
+            <li>violar intencional o involuntariamente cualquier ley local, estatal, nacional o internacional aplicable,</li>
+            <li>"acechar" o acosar a otro; y / o</li>
+            <li>recopilar o almacenar datos personales sobre otros usuarios en relaci&oacute;n con la conducta y actividades prohibidas establecidas en los p&aacute;rrafos anteriores.</li>
+        </ol>
+        <p>Usted reconoce que ###ORGANISATION### puede o no preseleccionar el Contenido, pero que ###ORGANISATION### y sus designados tendr&aacute;n el derecho (pero no la obligaci&oacute;n) a su sola discreci&oacute;n de preseleccionar, rechazar, mover o eliminar cualquier Contenido que est&eacute; disponible a trav&eacute;s del Servicio y que viole los TdS.<br/>
+        Usted acepta que debe evaluar y asumir todos los riesgos asociados con el uso de cualquier Contenido, incluida la confianza en la precisi&oacute;n, integridad o utilidad de dicho Contenido.</p>
+        <p>Usted reconoce, consiente y acepta que ###ORGANISATION### puede acceder, preservar y divulgar la informaci&oacute;n y el Contenido de su cuenta si as&iacute; lo requiere la ley o si cree de buena fe que dicha preservaci&oacute;n o divulgaci&oacute;n de acceso es razonablemente necesaria para:</p>
+        <ol style="list-style-type: lower-roman;">
+            <li>cumplir con el proceso legal;</li>
+            <li>hacer cumplir los TdS;</li>
+            <li>responder a reclamos de que alg&uacute;n Contenido viola los derechos de terceros;</li>
+            <li>responder a sus solicitudes de servicio al cliente; o </li>
+            <li>proteger los derechos, la propiedad o la seguridad personal de ###ORGANISATION### sus usuarios y el p&uacute;blico.</li>
+        </ol>
+        <br/>
+        </li>
+        <li style="text-align: justify;"><strong>CONTENIDO DISPONIBLE PARA INCLUSI&Oacute;N EN EL SERVICIO DE ###ORGANISATION###</strong>
+        <p>###ORGANISATION### no reclama la propiedad del Contenido que env&iacute;as o pone a disposici&oacute;n para su inclusi&oacute;n a trav&eacute;s del Servicio ###ORGANISATION###. Sin embargo, con respecto al Contenido que env&iacute;a o pone a disposici&oacute;n para su inclusi&oacute;n en el Servicio ###ORGANISATION### disponible p&uacute;blicamente, usted otorga irrevocablemente a ###ORGANISATION### la licencia perpetua, mundial, libre de regal&iacute;as y no exclusiva, con derecho a sublicenciar a trav&eacute;s de m&uacute;ltiples niveles de sublicenciatarios, para usar, distribuir, reproducir, modificar, adaptar, realizar p&uacute;blicamente y mostrar p&uacute;blicamente dicho Contenido, en su totalidad o en parte, en cualquiera de los servicios de ###ORGANISATION### u otras publicaciones de ###ORGANISATION### en cualquier medio ya sea que exista ahora o que llegue a existir en el futuro y para proporcionar esa informaci&oacute;n bajo la licencia establecida en la p&aacute;gina inicial del sitio ###WEBROOT###.<br/>
+        Y para el Contenido que env&iacute;a para discusiones privadas, otorga a ###ORGANISATION### la licencia mundial, libre de regal&iacute;as y no exclusiva para usar, distribuir, reproducir, modificar, adaptar, ejecutar p&uacute;blicamente y mostrar p&uacute;blicamente dicho Contenido en el sitio asociado o grupoa de discusi&oacute;n privado.</p></li>
+        <li style="text-align: justify;"><strong>INDEMNIZACI&Oacute;N</strong>
+        <p>Usted acepta indemnizar y eximir de responsabilidad a ###ORGANISATION### y a sus subsidiarias, afiliadas, funcionarios, agentes, empleados, socios y licenciantes de cualquier reclamo o demanda, incluidos, entre otros, los honorarios razonables de abogados, realizados por terceros debido o que surja del Contenido que env&iacute;e, publique, transmita o ponga a disposici&oacute;n a trav&eacute;s del Servicio, su uso del Servicio, su conexi&oacute;n con el Servicio, su violaci&oacute;n de los TdS o su violaci&oacute;n de cualquier derecho de otro.</p></li>
+        <li style="text-align: justify;"><strong>MODIFICACIONES AL SERVICIO DE ###ORGANISATION###</strong>
+        <p>Usted reconoce que ###ORGANISATION### puede establecer pr&aacute;cticas generales y l&iacute;mites con respecto al uso del Servicio, incluyendo sin limitaci&oacute;n el n&uacute;mero m&aacute;ximo de d&iacute;as que el Servicio retendr&aacute; los mensajes de correo electr&oacute;nico, publicaciones en foros de mensajes u otro Contenido cargado. Adem&aacute;s, reconoce que ###ORGANISATION### se reserva el derecho de modificar estas pr&aacute;cticas generales y l&iacute;mites de vez en cuando.</p>
+        <p>###ORGANISATION### se reserva el derecho, en cualquier momento y de vez en cuando, de modificar o interrumpir, temporal o permanentemente, el Servicio (o cualquier parte del mismo) con o sin previo aviso.<br/>
+        Usted acepta que ###ORGANISATION### no ser&aacute; responsable ante usted ni ante ning&uacute;n tercero por ninguna modificaci&oacute;n, suspensi&oacute;n o interrupci&oacute;n del Servicio.</p></li>
+        <li style="text-align: justify;"><strong>TERMINACI&Oacute;N</strong>
+        <p>Usted acepta que ###ORGANISATION### puede cancelar su acceso al Servicio por violaciones de los TdS y / o solicitudes de las fuerzas del orden u otras agencias gubernamentales autorizadas.</p></li>
+        <li style="text-align: justify;"><strong>ENLACES</strong>
+        <p>El Servicio puede proporcionar, o terceros pueden proporcionar, enlaces a otros sitios o recursos de la World Wide Web. Debido a que ###ORGANISATION### no tiene control sobre dichos sitios y recursos, usted reconoce y acepta que ###ORGANISATION### no es responsable de la disponibilidad de dichos sitios o recursos externos, y no respalda ni es responsable de cualquier Contenido, publicidad, productos u otros materiales en o disponibles en dichos sitios o recursos.</p>
+        <p>Adem&aacute;s, reconoce y acepta que ###ORGANISATION### no ser&aacute; responsable, directa o indirectamente, de ning&uacute;n da&ntilde;o o p&eacute;rdida causados ​​o supuestamente causados ​​por o en conexi&oacute;n con el uso o la confianza en dichos contenidos, bienes o servicios disponibles en o a trav&eacute;s de dicho sitio o recurso.</p></li>
+        <li style="text-align: justify;"><strong>RENUNCIA DE GARANT&Iacute;AS</strong>
+        <p>Usted comprende y acepta expresamente que:<br/>
+        - El uso del Servicio es bajo su propio riesgo.<br/>
+        - El servicio se proporciona "tal cual" y "seg&uacute;n disponibilidad".<br/>
+        ###ORGANISATION### y sus subsidiarias, afiliadas, funcionarios, empleados y otorgantes de licencias renuncian expresamente a todas las garant&iacute;as de cualquier tipo, ya sean expresas o impl&iacute;citas, incluidas, entre otras, las garant&iacute;as impl&iacute;citas de comerciabilidad, idoneidad para un prop&oacute;sito particular y no infracci&oacute;n.<br/>
+        ###ORGANISATION### y sus subsidiarias, afiliadas, funcionarios, empleados y otorgantes de licencias no garantizan que</p>
+        <ol style="list-style-type: lower-roman;">
+        <li>El servicio ###ORGANISATION### cumplir&aacute; con sus requisitos;</li>
+        <li>El servicio ###ORGANISATION### ser&aacute; ininterrumpido, oportuno, seguro o libre de errores y</li>
+        <li>Los resultados que se pueden obtener del uso del Servicio ser&aacute;n precisos o confiables. Ning&uacute;n consejo o informaci&oacute;n, ya sea oral o escrita, que usted obtenga de ###ORGANISATION### o a trav&eacute;s del servicio crear&aacute; ninguna garant&iacute;a que no est&eacute; expresamente establecida en los TdS.</li>
+        </ol>
+        <br/>
+        </li>
+        <li style="text-align: justify;"><strong>LIMITACI&Oacute;N DE RESPONSABILIDAD</strong>
+        <p>Usted comprende y acepta expresamente que ###ORGANISATION### y sus subsidiarias, afiliadas, funcionarios, empleados, agentes, socios y otorgantes de licencias no ser&aacute;n responsables ante usted por ning&uacute;n da&ntilde;o directo, indirecto, incidental, especial, consecuente o ejemplar, incluidos, pero no limitado a da&ntilde;os por lucro cesante, fondo de comercio, uso, datos u otras p&eacute;rdidas intangibles (incluso si se ha informado a ###ORGANISATION### de la posibilidad de tales da&ntilde;os), que resulten del uso o la imposibilidad de uso del Servicio.</p></li>
+        <li style="text-align: justify;"><strong>AVISO Y PROCEDIMIENTO PARA HACER RECLAMOS POR INFRACCI&Oacute;N DE DERECHOS DE AUTOR</strong>
+        <p>###ORGANISATION### respeta los derechos de autor de los dem&aacute;s y pedimos a nuestros usuarios que hagan lo mismo.<br/>
+        ###ORGANISATION### puede, en circunstancias apropiadas y a su discreci&oacute;n, deshabilitar y / o cancelar el acceso de usuarios que puedan ser infractores reincidentes.<br/>
+        Si cree que su trabajo ha sido copiado de una manera que constituye una infracci&oacute;n de derechos de autor, proporcione al Agente de derechos de autor de ###ORGANISATION### la siguiente informaci&oacute;n: una firma electr&oacute;nica o f&iacute;sica de la persona autorizada para actuar en nombre del propietario de los derechos de autor; una descripci&oacute;n del trabajo protegido por derechos de autor que usted afirma que se ha infringido; una descripci&oacute;n de d&oacute;nde se encuentra en el sitio el material que usted afirma que infringe; su direcci&oacute;n, n&uacute;mero de tel&eacute;fono y direcci&oacute;n de correo electr&oacute;nico; una declaraci&oacute;n suya de que cree de buena fe que el uso en disputa no est&aacute; autorizado por el propietario de los derechos de autor, su agente o la ley; una declaraci&oacute;n suya, hecha bajo pena de perjurio, de que la informaci&oacute;n anterior en su Aviso es precisa y que usted es el propietario de los derechos de autor o est&aacute; autorizado para actuar en nombre del propietario de los derechos de autor.</p>
+        <p>Puede comunicarse con el agente de ###ORGANISATION### para notificaci&oacute;n de reclamos de infracci&oacute;n de derechos de autor de la siguiente manera:</p>
+        <p style="text-align:center;">###CONTACTPERSON###</p>
+        </li>
+    </ol>
+    <p style="text-align:center;font-size:0.01em;">El texto de esta licencia se encuentra bajo <a title="https://creativecommons.org/licenses/by/3.0" href="https://creativecommons.org/licenses/by/3.0" target="_blank" rel="noopener">&laquo;Creative Commons - Attribution 3.0 Unported&raquo;</a>.<br/>Se basa en los <a title="https://opensource.org/ToS" href="https://opensource.org/ToS" target="_blank" rel="noopener">&laquo;T&eacute;rminos de servicio de la iniciativa de c&oacute;digo abierto&raquo;</a>.</p>
+</fieldset>

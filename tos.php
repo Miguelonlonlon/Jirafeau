@@ -30,8 +30,19 @@ if (is_readable(JIRAFEAU_ROOT . 'lib/tos.local.txt')) {
 }
 
 // Replace markers and print ToS
-require(JIRAFEAU_ROOT . 'lib/template/header.php');
+require(JIRAFEAU_ROOT . 'lib/template/header.php'); ?>
 
-echo '<div>' . jirafeau_replace_markers($content, true) . '</div>';
+<style>
+        a {
+            color: #fff;
+            text-transform: none;
+        }
+        a:hover, a:visited {
+            color: #fff;
+            text-transform: none;
+        }
+</style>
+
+<?php echo '<div>' . jirafeau_replace_markers($content, true) . '</div>';
 
 require(JIRAFEAU_ROOT . 'lib/template/footer.php');

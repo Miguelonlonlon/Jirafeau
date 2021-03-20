@@ -112,12 +112,16 @@ if (true === jirafeau_challenge_upload_ip_without_password($cfg, get_ip_address(
 </div>
 
 <div id="uploading" style="display:none;">
-    <p>
-        <?php echo t('UP'); ?>
-        <div id="uploaded_percentage"></div>
-        <div id="uploaded_speed"></div>
-        <div id="uploaded_time"></div>
-    </p>
+<fieldset>
+        <legend>
+            <?php echo t('UP'); ?>
+        </legend>
+        <p>
+            <div id="uploaded_percentage"></div>
+            <div id="uploaded_speed"></div>
+            <div id="uploaded_time"></div>
+        </p>
+    </fieldset>
 </div>
 
 <div id="error_pop" class="error" style="display:none;"></div>
@@ -188,7 +192,7 @@ habrá que introducirla para
 efectuar la descarga, de esta
 forma si tu enlace llega a malas
 manos, si no conoce la clave le 
-será imposible descargarlo">
+será imposible descargarlo" style="display:none;" >
                     <td>
                         <label for="input_key"><?php echo t('PSW') . ':'; ?></label>
                     </td>

@@ -20,6 +20,7 @@
 define('JIRAFEAU_ROOT', dirname(__FILE__) . '/');
 
 require(JIRAFEAU_ROOT . 'lib/settings.php');
+require(JIRAFEAU_ROOT . 'lib/config.local.php');
 require(JIRAFEAU_ROOT . 'lib/functions.php');
 require(JIRAFEAU_ROOT . 'lib/lang.php');
 
@@ -101,7 +102,7 @@ if (!empty($delete_code) && $delete_code == $link['link_code']) {
              <table>
              <tr><td>
              <?php if ($esgrupo) {
-                echo t('GONNA_DEL') . ' "Descarga_' . $link_name . '.zip"';
+                echo t('GONNA_DEL') . ' "' . jirafeau_zipname($link_name) . '"';
              } else {
                 echo t('GONNA_DEL') . ' "' . jirafeau_escape($link['file_name']) . '" (' . jirafeau_human_size($link['file_size']) . ').';
              } ?>
@@ -195,50 +196,77 @@ if (!empty($link['key'])) {
 }
 
 if (!$password_challenged && !$do_download && !$do_preview) {
-    require(JIRAFEAU_ROOT.'lib/template/header.php');
-    echo '<div>' .
-             '<form action="f.php" method="post" id="submit_post" class="form download">'; ?>
-             <input type = "hidden" name = "jirafeau" value = "<?php echo JIRAFEAU_VERSION ?>"/><?php
-        echo '<fieldset><legend>' . jirafeau_escape($link['file_name']) . '</legend><table>' .
-             '<tr><td>' .
-             t('NOW_DOWNLOADING') . ' "' . jirafeau_escape($link['file_name']) . '" (' . jirafeau_human_size($link['file_size']) . ').' .
-             '</td></tr>' .
-             '<tr><td>' .
-             t('USING_SERVICE'). ' <a href="tos.php" target="_blank" rel="noopener noreferrer">' . t('TOS') . '</a>.' .
-             '</td></tr>';
+    require(JIRAFEAU_ROOT.'lib/template/header.php'); ?>
+    <div>
+        <form action="f.php" method="post" id="submit_post" class="form download">
+        <input type = "hidden" name = "jirafeau" value = "<?php echo JIRAFEAU_VERSION ?>"/>
+        <fieldset>
+            <legend>
+                <?php echo t('DL_PAGE') ?>
+            </legend>
+            <table style="width:100%;margin:0 auto;">
+                <tr>
+                    <td style="padding-bottom:10px;">
+                        <?php echo jirafeau_escape($link['file_name']) ?>
+                    </td>
+                    <td style="width:40px;padding-bottom:10px;">
+                        <a href="f.php?h=<?php echo $link_name ?>&amp;d=1<?php if (!empty($crypt_key)) { ?>&amp;k=<?php echo urlencode($crypt_key); } ?>" target="_BLANK"><img src="img/download.svg" style="width:40px;border:none;" title="<?php echo t('DL') . ' ' . $link['file_name'] ?>" alt="<?php echo t('DL') . ' ' . $link['file_name'] ?>" onmouseover="javascript: this.src='img/download_activ.svg'" onmouseout="javascript: this.src='img/download.svg'" /></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div style="width:90%;margin:0 auto;padding-bottom:5px;"> Contenido del archivo</div>
+                        <table style="width:90%;margin:0 auto;border:dotted 1px #fff;border-radius: 8px;">
+                          <tbody>
+                                <tr>
+                                    <td style="text-align:left;padding-left:5px;">
+                                        <?php echo t('FILENAME') ?>
+                                    </td>
+                                    <td style="width:30px;padding-right:5px;text-align:center;">
+                                        <img src="img/download_head.svg" style="width:25px;border:none;" alt="<?php echo t('DL') ?>" />
+                                    </td>
+                                </tr>
+                                <?php $laclac = file(VAR_GROUPS . $link_name, FILE_IGNORE_NEW_LINES);
+                                foreach ($laclac as $lac) {
+                                    $lacf = jirafeau_get_link($lac); ?>
+                                <tr>
+                                    <td style="text-align:left;font-weigth:400;padding-left:5px;">
+                                        <small><?php echo $lacf['file_name']; ?></small>
+                                    </td>
+                                    <td style="width:30px;padding-right:5px;text-align:center;">
+                                        <a href="f.php?h=<?php echo $lac ?>&amp;d=1" target="_BLANK"><img src="img/download.svg" style="width:25px;border:none;" title="<?php echo t('DL') . ' ' . $lacf['file_name'] ?>" alt="<?php echo t('DL') . ' ' . $lacf['file_name'] ?>" onmouseover="javascript: this.src='img/download_activ.svg'" onmouseout="javascript: this.src='img/download.svg'" /></a>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="TOS">
+                        <small><?php echo t('USING_SERVICE') ?> <a href="tos.php" target="_blank" id="TOS" rel="noopener noreferrer"><?php echo t('TOS') ?></a>.</small>
+                    </td>
+                </tr>
 
-    if ($link['onetime'] == 'O') {
-        echo '<tr><td id="self_destruct">' .
-                 t('AUTO_DESTRUCT') .
-                 '</td></tr>';
-    } ?>
-        <tr><td><input type="submit" id = "submit_download"  value="<?php echo t('DL'); ?>"
-        onclick="document.getElementById('submit_post').action='<?php
-        echo 'f.php?h=' . $link_name . '&amp;d=1';
-    if (!empty($crypt_key)) {
-        echo '&amp;k=' . urlencode($crypt_key);
-    } ?>';
-        document.getElementById('submit_post').submit();"/><?php
-
-        if ($cfg['preview'] && jirafeau_is_viewable($link['mime_type'])) {
-            ?><input type="submit" id = "submit_preview"  value="<?php echo t('PREVIEW'); ?>"
-            onclick="document.getElementById('submit_post').action='<?php
-        echo 'f.php?h=' . $link_name . '&amp;p=1';
-            if (!empty($crypt_key)) {
-                echo '&amp;k=' . urlencode($crypt_key);
-            } ?>';
-        document.getElementById('submit_post').submit();"/><?php
-        }
-    echo '</td></tr>';
-    echo '</table></fieldset></form></div>';
-    require(JIRAFEAU_ROOT.'lib/template/footer.php');
+                <?php if ($link['onetime'] == 'O') { ?>
+                <tr>
+                    <td colspan="2" id="self_destruct">
+                        <?php echo t('AUTO_DESTRUCT') ?>
+                    </td>
+                </tr>
+                <?php } ?>
+            </table>
+        </fieldset>
+        </form>
+    </div>
+    <?php require(JIRAFEAU_ROOT.'lib/template/footer.php');
     exit;
 }
 
 header('HTTP/1.0 200 OK');
 header('Content-Length: ' . $link['file_size']);
 if ($esgrupo) {
-    header('Content-Disposition: attachment; filename="Descarga_' . $link_name . '.zip"');
+    header('Content-Disposition: attachment; filename="' . jirafeau_zipname($link_name) . '"');
     header('Content-Type: application/zip');
 } else {
     if (!jirafeau_is_viewable($link['mime_type']) || !$cfg['preview'] || $do_download) {

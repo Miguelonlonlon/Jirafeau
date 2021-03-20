@@ -12,7 +12,7 @@
             </div>
 		</div>
 </div>
-<div id="jyraphe" onclick="javascript:window.open('https://gitlab.com/mojo42/Jirafeau');">
+<div id="jyraphe" title="<?php echo t('POWERED_BY') ?>" onclick="javascript:window.open('https://gitlab.com/mojo42/Jirafeau');">
 </div>
 </body>
 </html>
